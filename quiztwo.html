@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quiz 2 — Multimodal Planning Fundamentals</title>
+  <style>
+    :root{
+      --bg:#0b1020;       /* deep navy */
+      --panel:#121a33;    /* card bg  */
+      --ink:#e6e9f2;      /* text     */
+      --muted:#a8b2d1;    /* subtext  */
+      --accent:#f6a5ff;   /* primary (different hue from Quiz 1) */
+      --accent-2:#9bffd0; /* success  */
+      --warn:#ffb454;     /* warning  */
+      --danger:#ff6b6b;   /* error    */
+      --border:#233057;   /* border   */
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--ink); background: radial-gradient(1200px 800px at 90% -10%, #311a4a 0%, #0b1020 60%);
+      line-height:1.5; letter-spacing:.2px;
+    }
+    .wrap{max-width:980px; margin:32px auto; padding:0 16px}
+    header{display:flex; align-items:center; gap:16px; margin-bottom:24px}
+    .logo{width:48px; height:48px; border-radius:12px; background:linear-gradient(135deg,var(--accent),#c78dff); display:grid; place-items:center; box-shadow: var(--shadow)}
+    .logo span{font-weight:800; color:#0b1020}
+    h1{font-size: clamp(22px, 3vw, 32px); margin:0}
+    .sub{color:var(--muted)}
+
+    .card{background:var(--panel); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card .head{display:flex; align-items:center; justify-content:space-between; padding:18px 20px; border-bottom:1px solid var(--border)}
+    .badge{font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(246,165,255,.12); color:var(--accent); border:1px solid rgba(246,165,255,.35)}
+
+    form{padding:16px}
+    fieldset{border:1px solid var(--border); border-radius:12px; padding:18px; margin:14px 0; background: rgba(255,255,255,.02)}
+    legend{padding:0 6px; color:var(--muted); font-size:13px}
+    .q{font-weight:600; font-size:clamp(16px, 2.3vw, 18px); margin-bottom:10px}
+
+    .options{display:grid; gap:10px; margin:8px 0}
+    .opt{display:flex; gap:10px; align-items:flex-start; padding:10px 12px; border:1px solid var(--border); border-radius:12px; background:rgba(255,255,255,.02); transition: transform .06s ease, border-color .2s ease}
+    .opt:hover{transform:translateY(-1px); border-color:#6b3a9e}
+    .opt input{margin-top:4px; width:18px; height:18px}
+    .label{flex:1}
+    .label strong{display:inline-block; min-width:22px}
+
+    .footer{display:flex; flex-wrap:wrap; gap:12px; padding:18px; border-top:1px solid var(--border)}
+    button{appearance:none; border:none; cursor:pointer; padding:12px 16px; border-radius:12px; font-weight:600}
+    .primary{background:linear-gradient(180deg, var(--accent), #b36af7); color:#0b1020}
+    .ghost{background:transparent; color:var(--ink); border:1px solid var(--border)}
+
+    .result{padding:16px 20px; display:none}
+    .result.show{display:block}
+    .score{font-size: clamp(20px, 3vw, 28px); font-weight:800}
+    .meter{height:10px; background:#1b2549; border:1px solid var(--border); border-radius:999px; overflow:hidden; margin-top:10px}
+    .bar{height:100%; width:0%; background:linear-gradient(90deg, var(--accent), #6ef7c1)}
+
+    .feedback{margin-top:10px; font-size:14px}
+    .ok{color: var(--accent-2)}
+    .no{color: var(--danger)}
+
+    .mark{border-color: rgba(155,255,208,.55) !important}
+    .mark.wrong{border-color: rgba(255,107,107,.6) !important}
+
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo" aria-hidden="true"><span>Q2</span></div>
+      <div>
+        <h1>Quiz 2 — Multimodal Planning Fundamentals</h1>
+        <div class="sub">Checkbox-style multiple choice • client-side scoring • no data saved</div>
+      </div>
+    </header>
+
+    <section class="card" aria-labelledby="quiz-title">
+      <div class="head">
+        <div id="quiz-title" class="sub">Answer by checking all correct options (some questions may have one correct choice). Submitting will grade instantly.</div>
+        <span class="badge" id="progress">0/8 answered</span>
+      </div>
+
+      <form id="quiz" novalidate>
+        <!-- Q1 -->
+        <fieldset data-question="1">
+          <legend>Question 1</legend>
+          <div class="q">1. Why does the lesson recommend using voice/audio modality first when planning AI prompts?</div>
+          <div class="options">
+            <label class="opt"><input type="checkbox" name="q1" value="A" /><span class="label"><strong>A.</strong> It eliminates the need for written prompts</span></label>
+            <label class="opt"><input type="checkbox" name="q1" value="B" /><span class="label"><strong>B.</strong> Speaking aloud helps explore broad ideas quickly and discover available options</span></label>
+            <label class="opt"><input type="checkbox" name="q1" value="C" /><span class="label"><strong>C.</strong> Voice inputs are more accurate for text-only models</span></label>
+            <label class="opt"><input type="checkbox" name="q1" value="D" /><span class="label"><strong>D.</strong> Audio lowers API costs</span></label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Q2 -->
+        <fieldset data-question="2">
+          <legend>Question 2</legend>
+          <div class="q">2. In the AI-agent phone call example, what’s the main benefit of that initial voice conversation?</div>
+          <div class="options">
+            <label class="opt"><input type="checkbox" name="q2" value="A" /><span class="label"><strong>A.</strong> It trains a custom speech-to-text model automatically</span></label>
+            <label class="opt"><input type="checkbox" name="q2" value="B" /><span class="label"><strong>B.</strong> It collects user voice data for future profiling</span></label>
+            <label class="opt"><input type="checkbox" name="q2" value="C" /><span class="label"><strong>C.</strong> It bypasses the need for a text prompt entirely</span></label>
+            <label class="opt"><input type="checkbox" name="q2" value="D" /><span class="label"><strong>D.</strong> It rapidly builds shared context and surfaces trade-offs and service options</span></label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Q3 -->
+        <fieldset data-question="3">
+          <legend>Question 3</legend>
+          <div class="q">3. After refining ideas via voice chat, what’s the next step to turn your conversation into an actionable plan?</div>
+          <div class="options">
+            <label class="opt"><input type="checkbox" name="q3" value="A" /><span class="label"><strong>A.</strong> Ask the model for a concise summary and step-by-step plan based on your preferences</span></label>
+            <label class="opt"><input type="checkbox" name="q3" value="B" /><span class="label"><strong>B.</strong> Immediately deploy the system without further review</span></label>
+            <label class="opt"><input type="checkbox" name="q3" value="C" /><span class="label"><strong>C.</strong> Switch to a different AI model for confirmation</span></label>
+            <label class="opt"><input type="checkbox" name="q3" value="D" /><span class="label"><strong>D.</strong> Convert the audio into a podcast</span></label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Q4 -->
+        <fieldset data-question="4">
+          <legend>Question 4</legend>
+          <div class="q">4. When planning with text, what two elements does the lesson say you should write out?</div>
+          <div class="options">
+            <label class="opt"><input type="checkbox" name="q4" value="A" /><span class="label"><strong>A.</strong> A list of API keys and environment variables</span></label>
+            <label class="opt"><input type="checkbox" name="q4" value="B" /><span class="label"><strong>B.</strong> A spoken dialogue script and audio clipping</span></label>
+            <label class="opt"><input type="checkbox" name="q4" value="C" /><span class="label"><strong>C.</strong> A feature list and a “user journey” outlining each step toward the end goal</span></label>
+            <label class="opt"><input type="checkbox" name="q4" value="D" /><span class="label"><strong>D.</strong> A timeline of company milestones</span></label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Q5 -->
+        <fieldset data-question="5">
+          <legend>Question 5</legend>
+          <div class="q">5. What is a “Mermaid flowchart,” and why is it recommended?</div>
+          <div class="options">
+            <label class="opt"><input type="checkbox" name="q5" value="A" /><span class="label"><strong>A.</strong> A video tutorial for AI tools, because videos are more engaging</span></label>
+            <label class="opt"><input type="checkbox" name="q5" value="B" /><span class="label"><strong>B.</strong> A text-based flowchart syntax that makes your plan crystal-clear for AI models</span></label>
+            <label class="opt"><input type="checkbox" name="q5" value="C" /><span class="label"><strong>C.</strong> A secret OpenAI internal tool for visualizing data</span></label>
+            <label class="opt"><input type="checkbox" name="q5" value="D" /><span class="label"><strong>D.</strong> An audio script format for chatbot dialogs</span></label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Q6 -->
+        <fieldset data-question="6">
+          <legend>Question 6</legend>
+          <div class="q">6. According to the lesson, why are images considered “1,000 words” in AI planning?</div>
+          <div class="options">
+            <label class="opt"><input type="checkbox" name="q6" value="A" /><span class="label"><strong>A.</strong> They can replace your entire text prompt</span></label>
+            <label class="opt"><input type="checkbox" name="q6" value="B" /><span class="label"><strong>B.</strong> They let you train image-only models without text</span></label>
+            <label class="opt"><input type="checkbox" name="q6" value="C" /><span class="label"><strong>C.</strong> They provide rich context all at once—for interfaces, system designs, or reference screenshots</span></label>
+            <label class="opt"><input type="checkbox" name="q6" value="D" /><span class="label"><strong>D.</strong> They reduce token usage by converting text into visuals</span></label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Q7 -->
+        <fieldset data-question="7">
+          <legend>Question 7</legend>
+          <div class="q">7. What’s the key advantage of combining voice, text, and images in a single AI prompt?</div>
+          <div class="options">
+            <label class="opt"><input type="checkbox" name="q7" value="A" /><span class="label"><strong>A.</strong> It maximizes clarity by leveraging complementary modalities for planning</span></label>
+            <label class="opt"><input type="checkbox" name="q7" value="B" /><span class="label"><strong>B.</strong> It trains every type of model in one go</span></label>
+            <label class="opt"><input type="checkbox" name="q7" value="C" /><span class="label"><strong>C.</strong> It automatically creates UIs without extra tools</span></label>
+            <label class="opt"><input type="checkbox" name="q7" value="D" /><span class="label"><strong>D.</strong> It avoids the need for prompt engineering</span></label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </fieldset>
+
+        <!-- Q8 -->
+        <fieldset data-question="8">
+          <legend>Question 8</legend>
+          <div class="q">8. Overall, Lesson Two’s core message is that effective AI system design requires:</div>
+          <div class="options">
+            <label class="opt"><input type="checkbox" name="q8" value="A" /><span class="label"><strong>A.</strong> Focusing exclusively on the fastest modality you know</span></label>
+            <label class="opt"><input type="checkbox" name="q8" value="B" /><span class="label"><strong>B.</strong> Avoiding visuals to keep prompts simple</span></label>
+            <label class="opt"><input type="checkbox" name="q8" value="C" /><span class="label"><strong>C.</strong> Integrating multiple modalities—voice, text, and images—for a well-rounded, optimized plan</span></label>
+            <label class="opt"><input type="checkbox" name="q8" value="D" /><span class="label"><strong>D.</strong> Outsourcing each modality to different third-party services</span></label>
+          </div>
+          <div class="feedback" aria-live="polite"></div>
+        </fieldset>
+
+        <div class="footer">
+          <button class="primary" type="submit">Grade Quiz</button>
+          <button class="ghost" type="button" id="resetBtn">Reset</button>
+          <span class="sub" aria-live="polite">Tip: A question is counted correct only if you select all and only the correct options.</span>
+        </div>
+      </form>
+
+      <div id="result" class="result" role="status" aria-live="polite">
+        <div class="score" id="scoreText">Score: 0 / 8</div>
+        <div class="meter" aria-hidden="true"><div class="bar" id="bar"></div></div>
+        <div class="sub" id="remark" style="margin-top:8px"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    // Answer key: arrays allow multi-answer questions in the future
+    const ANSWERS = {
+      1: ["B"],
+      2: ["D"],
+      3: ["A"],
+      4: ["C"],
+      5: ["B"],
+      6: ["C"],
+      7: ["A"],
+      8: ["C"],
+    };
+
+    const quiz = document.getElementById('quiz');
+    const progress = document.getElementById('progress');
+    const result = document.getElementById('result');
+    const scoreText = document.getElementById('scoreText');
+    const bar = document.getElementById('bar');
+    const remark = document.getElementById('remark');
+    const resetBtn = document.getElementById('resetBtn');
+
+    function setProgress(){
+      const answered = new Set();
+      [...quiz.querySelectorAll('input[type="checkbox"]:checked')]
+        .forEach(cb => answered.add(cb.name));
+      progress.textContent = `${answered.size}/8 answered`;
+    }
+
+    quiz.addEventListener('change', setProgress);
+
+    function arraysEqualAsSets(a,b){
+      if(a.length !== b.length) return false;
+      const sa = new Set(a), sb = new Set(b);
+      for(const v of sa){ if(!sb.has(v)) return false; }
+      return true;
+    }
+
+    function grade(){
+      let correct = 0;
+
+      // Clear previous marks
+      quiz.querySelectorAll('.opt').forEach(el=> el.classList.remove('mark','wrong'));
+      quiz.querySelectorAll('.feedback').forEach(el=> el.textContent = '');
+
+      for (const [q, key] of Object.entries(ANSWERS)){
+        const fs = quiz.querySelector(`fieldset[data-question="${q}"]`);
+        const chosen = [...fs.querySelectorAll('input[type="checkbox"]:checked')].map(el=>el.value);
+
+        // Mark selected options
+        fs.querySelectorAll('input[type="checkbox"]').forEach(cb=>{
+          const opt = cb.closest('.opt');
+          if (cb.checked) opt.classList.add('mark');
+        });
+
+        const ok = arraysEqualAsSets(chosen, key);
+        if(ok){
+          correct++;
+          fs.querySelector('.feedback').innerHTML = `<span class="ok">✅ Correct.</span>`;
+        } else {
+          fs.querySelector('.feedback').innerHTML = `<span class=\"no\">❌ Incorrect.</span> Correct answer: <strong>${key.join(', ')}</strong>`;
+          // Emphasize which are correct
+          key.forEach(letter=>{
+            const cb = fs.querySelector(`input[value="${letter}"]`);
+            if(cb){ cb.closest('.opt').classList.add('mark'); }
+          });
+          // Flag wrong selections
+          const wrong = chosen.filter(v=> !key.includes(v));
+          wrong.forEach(letter=>{
+            const cb = fs.querySelector(`input[value="${letter}"]`);
+            if(cb){ cb.closest('.opt').classList.add('wrong'); }
+          })
+        }
+      }
+
+      const total = Object.keys(ANSWERS).length;
+      const pct = Math.round((correct/total)*100);
+      scoreText.textContent = `Score: ${correct} / ${total} (${pct}%)`;
+      bar.style.width = `${pct}%`;
+      remark.textContent = pct === 100 ? 'Perfect! Multimodal mastery.'
+        : pct >= 75 ? 'Great job—strong grasp of Lesson Two.'
+        : pct >= 50 ? 'Decent start—review the planning tips and try again.'
+        : 'Give it another go—revisit the lesson and retake the quiz.';
+
+      result.classList.add('show');
+      result.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+
+    quiz.addEventListener('submit', e=>{ e.preventDefault(); grade(); });
+
+    resetBtn.addEventListener('click', ()=>{
+      quiz.reset();
+      result.classList.remove('show');
+      quiz.querySelectorAll('.opt').forEach(el=> el.classList.remove('mark','wrong'));
+      quiz.querySelectorAll('.feedback').forEach(el=> el.textContent = '');
+      progress.textContent = '0/8 answered';
+      bar.style.width = '0%';
+      scoreText.textContent = 'Score: 0 / 8';
+      remark.textContent = '';
+      window.scrollTo({top:0, behavior:'smooth'});
+    });
+
+    // Initialize
+    setProgress();
+  </script>
+</body>
+</html>
