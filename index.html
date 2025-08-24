@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Masterclass Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .welcome-title {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .lesson-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .lesson-card:nth-child(1) { animation-delay: 0.4s; }
+        .lesson-card:nth-child(2) { animation-delay: 0.5s; }
+        .lesson-card:nth-child(3) { animation-delay: 0.6s; }
+        .lesson-card:nth-child(4) { animation-delay: 0.7s; }
+        .lesson-card:nth-child(5) { animation-delay: 0.8s; }
+
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .lesson-card:hover::before {
+            left: 100%;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .lesson-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #667eea;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .lesson-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .lesson-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .start-quiz-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .start-quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2.5rem;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .lesson-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="welcome-title">Welcome to the AI Masterclass Quiz</h1>
+        <p class="subtitle">Test your knowledge across 5 comprehensive lessons</p>
+        
+        <div class="lessons-grid">
+            <div class="lesson-card" onclick="window.location.href='lesson1.html'">
+                <span class="lesson-number">01</span>
+                <h3 class="lesson-title">Lesson 1</h3>
+                <a href="lesson1.html" class="start-quiz-btn">Start Quiz</a>
+            </div>
+            
+            <div class="lesson-card" onclick="window.location.href='lesson2.html'">
+                <span class="lesson-number">02</span>
+                <h3 class="lesson-title">Lesson 2</h3>
+                <a href="lesson2.html" class="start-quiz-btn">Start Quiz</a>
+            </div>
+            
+            <div class="lesson-card" onclick="window.location.href='lesson3.html'">
+                <span class="lesson-number">03</span>
+                <h3 class="lesson-title">Lesson 3</h3>
+                <a href="lesson3.html" class="start-quiz-btn">Start Quiz</a>
+            </div>
+            
+            <div class="lesson-card" onclick="window.location.href='lesson4.html'">
+                <span class="lesson-number">04</span>
+                <h3 class="lesson-title">Lesson 4</h3>
+                <a href="lesson4.html" class="start-quiz-btn">Start Quiz</a>
+            </div>
+            
+            <div class="lesson-card" onclick="window.location.href='lesson5.html'">
+                <span class="lesson-number">05</span>
+                <h3 class="lesson-title">Lesson 5</h3>
+                <a href="lesson5.html" class="start-quiz-btn">Start Quiz</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
